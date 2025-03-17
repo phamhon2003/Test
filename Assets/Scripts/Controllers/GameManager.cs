@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("==> AutoPlay đang thực hiện hành động...");
 
-            yield return new WaitForSeconds(0.5f); // Độ trễ giữa các hành động
+            yield return new WaitForSeconds(0.5f); 
 
             if (m_boardController == null) continue;
 
@@ -246,8 +246,7 @@ public class GameManager : MonoBehaviour
                 Cell randomCell = validCells[UnityEngine.Random.Range(0, validCells.Count)];
                 m_boardController.MoveItemToBottom(randomCell);
             }
-
-            // Kiểm tra thắng
+           
             if (m_boardController.CheckWinCondition())
             {
                 Debug.Log("AutoPlay: You win!");
@@ -263,7 +262,7 @@ public class GameManager : MonoBehaviour
             // Giả lập di chuyển để xem có tạo được nhóm 3 không
             if (WouldCreateMatch(cell))
             {
-                return cell; // Chọn ngay ô này
+                return cell; 
             }
         }
 
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        return null; // Nếu không có nước đi tối ưu, trả về null
+        return null; 
     }
     private bool WouldCreateMatch(Cell cell)
     {
@@ -338,14 +337,10 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator AutoPlayLoseRoutine()
     {
-        Debug.Log("==> AutoPlayLose bắt đầu!");
-
         yield return new WaitForSeconds(1f);
-
         while (State == eStateGame.AutoPlayLose)
         {
-            Debug.Log("==> AutoPlay đang thực hiện hành động tệ nhất...");
-
+           
             yield return new WaitForSeconds(0.5f);
 
             if (m_boardController == null) continue;
@@ -353,12 +348,10 @@ public class GameManager : MonoBehaviour
             List<Cell> validCells = m_boardController.GetAvailableCells();
             if (validCells.Count == 0)
             {
-                Debug.Log("==> Không còn nước đi! Dừng AutoPlayLose.");
                 GameOver(false);
                 break;
             }
 
-            // Chọn nước đi tệ nhất (khó tạo nhóm 3 nhất)
             Cell worstMove = FindWorstMove(validCells);
             if (worstMove != null)
             {
@@ -366,7 +359,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Không tìm thấy nước đi tệ, chọn ngẫu nhiên.");
                 Cell randomCell = validCells[UnityEngine.Random.Range(0, validCells.Count)];
                 m_boardController.MoveItemToBottom(randomCell);
             }
@@ -384,14 +376,11 @@ public class GameManager : MonoBehaviour
     {
         foreach (var cell in validCells)
         {
-            // Kiểm tra nếu ô này KHÔNG giúp tạo nhóm 3
             if (!WouldCreateMatch(cell))
             {
                 return cell;
             }
         }
-
-        // Nếu tất cả đều tạo nhóm 3, chọn ngẫu nhiên
         return null;
     }
 }

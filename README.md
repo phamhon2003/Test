@@ -5,5 +5,6 @@
 - Hiển thị màn chơi win, lose
 - Hiển thị đủ 7 item
 - Tổng số item cùng loại % 3
+- Hoat anh di chuyen va hoạt anh xoa
 - Auto Play Win 
 - Auto Play Lose
