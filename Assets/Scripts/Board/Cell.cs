@@ -111,11 +111,10 @@ public class Cell : MonoBehaviour
     }
     private void HandleCellTapped()
     {
-        // Kiểm tra xem GameManager có tồn tại không
+        
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
-            // Gọi phương thức OnItemTapped của GameManager và truyền ô hiện tại
             gameManager.OnItemTapped(this);
         }
         else
